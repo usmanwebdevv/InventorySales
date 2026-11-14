@@ -60,4 +60,5 @@ public class ProductsController : ControllerBase
         await _repository.DeleteAsync(id);
         return NoContent();
     }
+    
 }
