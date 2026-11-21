@@ -1,6 +1,7 @@
 using InventorySales.Application.DTOs;
 using InventorySales.Application.Interfaces;
 using InventorySales.Application.Mappings;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InventorySales.Api.Controllers;
@@ -32,6 +33,7 @@ public class ProductsController : ControllerBase
         return Ok(product.ToDto());
     }
 
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> Create(CreateProductDto dto)
     {
@@ -40,6 +42,7 @@ public class ProductsController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = created.Id }, created.ToDto());
     }
 
+    [Authorize]
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, UpdateProductDto dto)
     {
@@ -51,6 +54,7 @@ public class ProductsController : ControllerBase
         return NoContent();
     }
 
+    [Authorize]
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
@@ -60,5 +64,4 @@ public class ProductsController : ControllerBase
         await _repository.DeleteAsync(id);
         return NoContent();
     }
-    
 }
